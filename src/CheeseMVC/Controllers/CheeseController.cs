@@ -43,19 +43,19 @@ namespace CheeseMVC.Controllers
                     Type = addCheeseViewModel.Type
                 };
 
-                context.Cheeses.Add(newCheese);
-                context.SaveChanges();
+                context.Cheeses.Add(newCheese); //adds the newly made cheese object to the db 
+                context.SaveChanges(); //commits the new cheese to the db (saves it)
 
-                return Redirect("/Cheese");
+                return Redirect("/Cheese"); //sends user back to the home page
             }
 
-            return View(addCheeseViewModel);
+            return View(addCheeseViewModel); //if user inout does not pass validation send user back to the homepage with the form to add cheese along with any error messages
         }
 
         public IActionResult Remove()
         {
             ViewBag.title = "Remove Cheeses";
-            ViewBag.cheeses = context.Cheeses.ToList();
+            ViewBag.cheeses = context.Cheeses.ToList(); //sends the user to the remove page showing all the cheeses currently in db as  option for deletion
             return View();
         }
 
@@ -64,13 +64,13 @@ namespace CheeseMVC.Controllers
         {
             foreach (int cheeseId in cheeseIds)
             {
-                Cheese theCheese = context.Cheeses.Single(c => c.ID == cheeseId);
-                context.Cheeses.Remove(theCheese);
+                Cheese theCheese = context.Cheeses.Single(c => c.ID == cheeseId); //theCheese stores the cheese found in the db  that matches the id of the cheese user selected for deletion 
+                context.Cheeses.Remove(theCheese); //query to delete the user selected cheese from the db 
             }
 
-            context.SaveChanges();
+            context.SaveChanges(); // commits changes to the db
 
-            return Redirect("/");
+            return Redirect("/");//sends the user back to the homepage
         }
     }
 }

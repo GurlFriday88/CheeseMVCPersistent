@@ -27,7 +27,7 @@ namespace CheeseMVC.ViewModels
 
             // <option value="0">Hard</option>
             CheeseTypes.Add(new SelectListItem {
-                Value = ((int) CheeseType.Hard).ToString(),
+                Value = ((int) CheeseType.Hard).ToString(), //takes the cheese type hard from the enum list in models and converts its index to a string
                 Text = CheeseType.Hard.ToString()
             });
 
