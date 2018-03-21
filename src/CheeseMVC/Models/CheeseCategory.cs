@@ -9,6 +9,7 @@ namespace CheeseMVC.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
+        public IList<Cheese> Cheese { get; set; }
     }
     //this represents a table and every instance of this class will represent a row in this table  
 
