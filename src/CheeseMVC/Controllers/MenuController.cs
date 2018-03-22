@@ -84,6 +84,14 @@ namespace CheeseMVC.Controllers
             return View(menuView);
 
         }
+
+
+        public IActionResult AddItem(int id)
+        {
+            Menu getMenu = context.Menus.Single(gm => gm.MenuID == id);
+
+
+        }
     }
 
 }
