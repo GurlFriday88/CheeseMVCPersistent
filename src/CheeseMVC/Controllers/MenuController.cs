@@ -95,6 +95,43 @@ namespace CheeseMVC.Controllers
 
             return View(addMenuItemView);
         }
+
+        [HttpPost]
+        public IActionResult AddItem(AddMenuItemViewModel addMenuItemView)
+        {
+            
+
+            if (!ModelState.IsValid)
+            {
+
+                return View("AddItem");
+            }
+            IList<CheeseMenu> existingItems = context.CheeseMenus
+            .Where(cm => cm.CheeseID == addMenuItemView.cheeseID)
+            .Where(cm => cm.MenuID == addMenuItemView.menuID).ToList();
+            if (existingItems == null)
+            {
+
+                CheeseMenu newCheeseMenu = new CheeseMenu
+                {
+                    CheeseID = addMenuItemView.cheeseID,
+                    MenuID = addMenuItemView.menuID
+                    
+                };
+                context.CheeseMenus.Add(newCheeseMenu);
+                context.SaveChanges();
+
+                return Redirect("Menu/ViewMenu/ " + newCheeseMenu.MenuID);
+            }
+
+            return View("Menu");
+
+
+
+
+
+
+        }
     }
 
 }
