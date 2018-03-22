@@ -43,7 +43,7 @@ namespace CheeseMVC.Controllers
                 {
                     Name = addCheeseViewModel.Name,
                     Description = addCheeseViewModel.Description,
-                    Category = newCheeseCategory
+                    CategoryID = newCheeseCategory.ID
                 };
 
                 context.Cheeses.Add(newCheese); //adds the newly made cheese object to the db 
