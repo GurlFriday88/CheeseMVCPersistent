@@ -1,5 +1,6 @@
 ﻿using CheeseMVC.Data;
 using CheeseMVC.Models;
+using CheeseMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,13 @@ namespace CheeseMVC.Controllers
 
             return View(Menus);
 
+        }
+
+        public IActionResult Add()
+        {
+            AddMenuViewModel newMenu = new AddMenuViewModel();
+
+            return View(newMenu);
         }
     }
 }
