@@ -58,34 +58,26 @@ namespace CheeseMVC.Controllers
             context.SaveChanges();
 
 
-            return Redirect("/ViewMenu/" + newMenu.MenuID);
+            return Redirect("/Menu/ViewMenu/" + newMenu.MenuID);
         }
 
-        //[HttpGet]
-        //public IActionResult ViewMenu(int id)
-        //{
-        //    Menu targetMenu = context.Menus.Single(tm => tm.MenuID == id);
-
-        //    return View("Index");
-
-        //}
+        
 
         [HttpGet]
-        //[Route("/ViewMenu/id= {0}")]
         public IActionResult ViewMenu(int id)
         {
             Menu targetMenu = context.Menus.Single(tm => tm.MenuID == id);
 
-            //List<CheeseMenu> items = context
-            //.CheeseMenus
-            //.Include(item => item.Cheese)
-            //.Where(cm => cm.MenuID == id)
-            //.ToList();
+            List<CheeseMenu> items = context
+            .CheeseMenus
+            .Include(item => item.Cheese)
+            .Where(cm => cm.MenuID == id)
+            .ToList();
 
             ViewMenuViewModel menuView = new ViewMenuViewModel
             {
                 Menu = targetMenu,
-                //Items = items
+                Items = items
 
 
             };
@@ -113,28 +105,28 @@ namespace CheeseMVC.Controllers
             if (ModelState.IsValid)
             {
                 IList<CheeseMenu> existingItems = context.CheeseMenus
-                .Where(cm => cm.CheeseID == addMenuItemView.cheeseID)
-                .Where(cm => cm.MenuID == addMenuItemView.menuID).ToList();
-                if (existingItems == null)
+                .Where(cm => cm.CheeseID == addMenuItemView.CheeseID)
+                .Where(cm => cm.MenuID == addMenuItemView.MenuID).ToList();
+                if (existingItems.Count == 0)
                 {
 
                     CheeseMenu newCheeseMenu = new CheeseMenu
                     {
-                        CheeseID = addMenuItemView.cheeseID,
-                        MenuID = addMenuItemView.menuID
+                        CheeseID = addMenuItemView.CheeseID,
+                        MenuID = addMenuItemView.MenuID
 
                     };
                     context.CheeseMenus.Add(newCheeseMenu);
                     context.SaveChanges();
 
-                    return Redirect("Menu/ViewMenu/ " + newCheeseMenu.MenuID);
+                    return Redirect("/Menu/ViewMenu/" + newCheeseMenu.MenuID);
                 }
+
+                return View("AddItem");
 
 
             }
             
-            
-
             return View("AddItem");
 
 
