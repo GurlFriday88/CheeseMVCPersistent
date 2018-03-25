@@ -8,18 +8,19 @@
 
 <h1>@ViewBag.Title</h1>
 
-<ul>
-
-
-    @foreach (var item in Model.Items)
-    {
-        <li>@item.Cheese.Name</li>
-
-    }
-    
-</ul>
 
 <div>
-    <p><a asp-controller="Menu" asp-action="AddItem" asp-route-id="@Model.Menu.MenuID"></a>Add an item to your menu</p>
+    <ul>
+        @foreach (var item in Model.Items)
+         {
+             <li>@item.Cheese.Name</li>
+         }
+
+    </ul>
+</div>
+
+
+<div>
+    <p><a asp-controller="Menu" asp-action="AddItem" asp-route-id="@Model.Menu.MenuID">Add an item to your menu</a></p>
 
 </div>

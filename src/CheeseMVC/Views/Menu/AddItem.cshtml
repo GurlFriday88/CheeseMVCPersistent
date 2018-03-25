@@ -1,16 +1,16 @@
 ﻿@model CheeseMVC.ViewModels.AddMenuItemViewModel
 
 
-@{
+@*@{
 
     ViewBag.Title = "Add Item to Menu: " + Model.Menu.Name;
- }
+ }*@
 
 
 <form asp-controller="Menu" asp-action="AddItem" method="post">
 
     <label asp-for="Cheeses">Avaliable Cheeses</label>
-    <select asp-for="Cheeses">
+    <select asp-for="cheeseID">
         @foreach (var cheese in Model.Cheeses)
         {
             <option value="@cheese.Value">@cheese.Text</option>
